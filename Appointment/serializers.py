@@ -4,8 +4,8 @@ from doctor.serializers import DoctorSerializer
 from doctor.serializers import ScheduleSerializer
 
 class AppointmentSerializer(serializers.ModelSerializer):
-    doctor = DoctorSerializer()
-    schedule = ScheduleSerializer()
+    doctor = DoctorSerializer()                                           #Creating Doctor instance
+    schedule = ScheduleSerializer()                                       #Creating Schedule instance
     class Meta:
         model = Appointment
         fields = ('id', 'patient', 'doctor', 'schedule', 'appointment_date', 'appointment_time',)

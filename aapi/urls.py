@@ -15,19 +15,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+#router
 from rest_framework import routers
-from doctor.views import DoctorViewset,ScheduleViewset
+from doctor.views import DoctorViewset,ScheduleViewset,DoctorListView
 
 router = routers.DefaultRouter()
 
 router.register('doctors', DoctorViewset)
 router.register('schedules', ScheduleViewset)
 
+#swagger
+from rest_framework_swagger.views import get_swagger_view
 
+schema_view = get_swagger_view(title='Appointment Api')
 
+#EndPoints
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('swagger-docs/', schema_view),
     path('accounts/', include('accounts.urls')),
     path('', include(router.urls)),
     path('appointments/', include('Appointment.urls')),
+    path('doctorlist/', DoctorListView.as_view(), name='DoctorList'),
 ]

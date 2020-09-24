@@ -5,6 +5,7 @@ from .views import UserCreateView,UserDetailView,UserListView
 urlpatterns = [
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', jwt_views.TokenVerifyView.as_view(), name='token_verify'),
     path('list/', UserListView.as_view(), name = 'userlist'),
     path('create/', UserCreateView.as_view(), name = 'usercreate'),
     path('update/<int:pk>/', UserDetailView.as_view(), name = 'userupdate'),

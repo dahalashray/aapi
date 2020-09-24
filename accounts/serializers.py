@@ -6,7 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True, required=False)
 
 
-    def create(self,validated_data):
+    def create(self,validated_data):                                                   #Overriding create() to add confirm_password attribute
         if User.objects.filter(username = validated_data.get('username')).exists():
             raise serializers.ValidationError("Username already taken.")
 
@@ -21,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     
 
-    def update(self, instance, validated_data):
+    def update(self, instance, validated_data):                                         #Overriding update() to save password that follow django algorithm
         password = validated_data.pop('password', None)
 
         for (key, value) in validated_data.items():
@@ -35,6 +35,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        model = User
+        model = User                                                               
         fields = ['email', 'username', 'password', 'confirm_password',]
         read_only_fields = ['confirm_password',]
